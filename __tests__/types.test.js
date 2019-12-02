@@ -55,7 +55,10 @@ describe('validator module', () => {
       expect(castToString(true)).toEqual('true');
       expect(castToString(false)).toEqual('false');
       expect(castToString([1, 2])).toEqual('1,2');
+      expect(castToString([])).toEqual('');
+      expect(castToString('')).toEqual('');
       expect(castToString({})).toEqual('[object Object]');
+      expect(castToString(undefined)).toEqual('undefined');
     });
 
     it('can cast values to a boolean', () => {
