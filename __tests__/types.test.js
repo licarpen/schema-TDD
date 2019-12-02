@@ -2,6 +2,7 @@ const {
   isNumber,
   isString,
   castToNumber,
+  castToString
   getCaster
 } = require('../lib/types.js');
 
@@ -38,6 +39,16 @@ describe('validator module', () => {
       expect(() => castToNumber('hi')).toThrowErrorMatchingSnapshot();
       expect(() => castToNumber({})).toThrowErrorMatchingSnapshot();
     });
+
+    it('can cast values to a string', () => {
+      expect(castToString('hi')).toEqual('hi');
+      expect(castToString(3)).toEqual('3');
+      expect(castToString(true)).toEqual('true');
+      expect(castToString(false)).toEqual('false');
+      expect(castToString([1, 2])).toEqual('[1, 2]');
+      expect(castToString({})).toEqual('{}');
+    });
+
   });
 
   it('can get the right caster', () => {
