@@ -46,6 +46,15 @@ describe('validator module', () => {
       expect(isArray({ name: 'Me', color: 'red' })).toBeFalsy;
     });
 
+    it('properly tells if a value is an object', () => {
+      expect(isObject({})).toBeTruthy();
+      expect(isObject({ name: 'Me', color: 'red' })).toBeTruthy();
+      expect(isObject([1, 2])).toBeFalsy();
+      expect(isObject(1)).toBeFalsy();
+      expect(isObject('Hi')).toBeFalsy();
+      expect(isObject(true)).toBeFalsy;
+    });
+
   });
 
   describe('casters', () => {
@@ -99,13 +108,9 @@ describe('validator module', () => {
       expect(castToArray([1, 2, 3])).toEqual([1, 2, 3]);
       expect(castToArray([])).toEqual([]);
       expect(castToArray('hi')).toEqual(['h', 'i']);
+      expect(castToArray(123)).toEqual(['1', '2', '3']);
       expect(castToArray({ me:1, you:2 })).toEqual([{ me:1 }, { you:2 }]);
-      expect(castToArray(123)).toEqual([123]);
-    });
-
-    it('throws if value is not castable to an array', () => {
-      expect(() => castToArray('hi')).toThrowErrorMatchingSnapshot();
-      expect(() => castToArray(3)).toThrowErrorMatchingSnapshot();
+      
     });
 
   });
