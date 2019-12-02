@@ -4,6 +4,7 @@ const {
   isBoolean,
   castToNumber,
   castToString,
+  castToBoolean,
   getCaster
 } = require('../lib/types.js');
 
@@ -55,6 +56,28 @@ describe('validator module', () => {
       expect(castToString(false)).toEqual('false');
       expect(castToString([1, 2])).toEqual('1,2');
       expect(castToString({})).toEqual('[object Object]');
+    });
+
+    it('can cast values to a boolean', () => {
+      expect(castToBoolean(true)).toEqual(true);
+      expect(castToBoolean(false)).toEqual(false);
+      expect(castToBoolean('true')).toEqual(true);
+      expect(castToBoolean('false')).toEqual(false);
+      expect(castToBoolean('True')).toEqual(true);
+      expect(castToBoolean('False')).toEqual(false);
+      expect(castToBoolean('TRUE')).toEqual(true);
+      expect(castToBoolean('FALSE')).toEqual(false);
+      expect(castToBoolean('t')).toEqual(true);
+      expect(castToBoolean('f')).toEqual(false);
+      expect(castToBoolean('T')).toEqual(true);
+      expect(castToBoolean('F')).toEqual(false);
+      expect(castToBoolean(1)).toEqual(true);
+      expect(castToBoolean(0)).toEqual(false);
+    });
+
+    it('throws if value is not castable to boolean', () => {
+      expect(() => castToBoolean('hi')).toThrowErrorMatchingSnapshot();
+      expect(() => castToBoolean(3)).toThrowErrorMatchingSnapshot();
     });
 
   });
