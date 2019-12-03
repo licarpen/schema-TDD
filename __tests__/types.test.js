@@ -120,7 +120,7 @@ describe('validator module', () => {
       expect(castToArray([])).toEqual([]);
       expect(castToArray('hi')).toEqual(['h', 'i']);
       expect(castToArray(123)).toEqual(['1', '2', '3']);
-      expect(castToArray({ me:1, you:2 })).toEqual([{ me:1 }, { you:2 }]);
+      expect(castToArray({ me:1, you:2 })).toEqual([['me', 1], ['you', 2]]);
       
     });
 
